@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +13,8 @@ import { ApplicationStatsComponent } from './application-stats/application-stats
 import { TeamStatComponent } from './team-stat/team-stat.component';
 import { PlayerStatsComponent } from './player-stats/player-stats.component';
 import { HomeSummeryComponent } from './home-summery/home-summery.component';
+
+import { APIServiceService } from './services/API-service.service';
 
 @NgModule({
    declarations: [
@@ -24,9 +29,13 @@ import { HomeSummeryComponent } from './home-summery/home-summery.component';
    ],
    imports: [
       BrowserModule,
+      FormsModule,
+      HttpClientModule,
       AppRoutingModule
    ],
-   providers: [],
+   providers: [
+      APIServiceService
+   ],
    bootstrap: [
       AppComponent
    ]

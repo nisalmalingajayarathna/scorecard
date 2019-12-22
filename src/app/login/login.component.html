@@ -1,5 +1,12 @@
 <div class="container-fluid">
 
+    <div *ngIf="isLoginSuccessful==2" class="alert alert-danger" role="alert">
+        Login failed. Please try again.
+    </div>
+    <div *ngIf="isLoginSuccessful==1" class="alert alert-success" role="alert">
+        Login Successful.
+    </div>
+
     <div class="row text-center">
         <div class="col-4 d-md-none d-lg-block"></div>
 
@@ -9,9 +16,9 @@
 
                 <p class="h4 mb-4">Sign in</p>
 
-                <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+                <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail" [(ngModel)]="userName">
 
-                <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+                <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password" [(ngModel)]="userPassword">
 
                 <div class="d-flex justify-content-around">
                     <div>
@@ -25,7 +32,7 @@
                     </div>
                 </div>
 
-                <button class="btn btn-info btn-block my-4" type="submit" (click)="goToHome()">Sign in</button>
+                <button class="btn btn-info btn-block my-4" type="submit" (click)="login()">Sign in</button>
 
             </div>
 
@@ -34,4 +41,10 @@
         <div class="col-4 d-md-none d-lg-block"></div>
     </div>
 
+</div>
+
+<div *ngIf="loadingVisibility" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; background-color: #79797971;">
+    <div class="spinner-grow text-primary" role="status" style="position: absolute; top: 48%; left: 48%;">
+        <span class="sr-only">Loading...</span>
+    </div>
 </div>

@@ -3,7 +3,7 @@
     <div class="row pt-3">
 
         <!-- all user login details -->
-        <div class="col-8 pr-2 custom-scrollbar mvh-80">
+        <div class="col-lg-7 col-md-12 pr-2 custom-scrollbar mvh-80">
             <h5 class="text-dark-gray mb-3">User Details</h5>
 
             <table class="table table-bordered table-hover">
@@ -15,15 +15,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Mark</td>
+                    <tr *ngFor="let user of allUsersList">
+                        <td>{{(user.first_name || user.last_name) ? (user.first_name + ' ' + user.last_name) : user.username}}</td>
                         <td class="text-right">5</td>
                         <td class="text-right">5h</td>
-                    </tr>
-                    <tr>
-                        <td>Jacob</td>
-                        <td class="text-right">6</td>
-                        <td class="text-right">2d 3h</td>
                     </tr>
                 </tbody>
             </table>
@@ -31,21 +26,21 @@
         <!-- end all user login details -->
 
         <!-- current logged-in user details -->
-        <div class="col pl-2 custom-scrollbar mvh-80">
+        <div class="col-lg-5 col-md-12 pl-2 custom-scrollbar mvh-80">
             <h5 class="text-dark-gray mb-3">Currently Logged</h5>
 
             <div class="list-group">
 
-                <div class="list-group-item align-items-start p-0 m-0">
-                    <table class="table table-borderless table-sm score-summery-thead m-1">
+                <div class="list-group-item align-items-start p-0 m-0" *ngFor="let user of allUsersList">
+                    <table class="table table-borderless table-sm score-summery-thead m-1" *ngIf="user.is_online">
                         <tbody>
                             <tr>
                                 <th scope="col">User name</th>
-                                <td>Nisal Malinga</td>
+                                <td>{{(user.first_name || user.last_name) ? (user.first_name + ' ' + user.last_name) : user.username}}</td>
                             </tr>
                             <tr>
                                 <th scope="col">Logged time</th>
-                                <td>05 : 27 am</td>
+                                <td>{{user.last_login ? last_login : ''}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -57,4 +52,11 @@
 
     </div>
 
+</div>
+
+<div *ngIf="showError" class="alert alert-danger alert-dismissible fade show" role="alert" style="position: absolute; bottom: 2%; left: 2%;">
+    <strong>Error</strong> Error occurred while loading data from the server. Please retry.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="showError=false;">
+          <span aria-hidden="true">&times;</span>
+        </button>
 </div>

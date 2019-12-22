@@ -3,27 +3,23 @@
     <div class="row pt-3">
 
         <!-- teams summery -->
-        <div class="col-4 p-1 custom-scrollbar mvh-80">
+        <div class="col-lg-4 col-md-12 p-1 custom-scrollbar mvh-80">
             <h5 class="text-dark-gray mb-3">Teams</h5>
 
             <div class="list-group mt-3 mb-3">
 
                 <!-- team score item -->
-                <div class="custom-list-item list-group-item align-items-start p-2 m-0">
+                <div class="custom-list-item list-group-item align-items-start p-2 m-0" *ngFor="let team of teamDetails" (click)="getTeamScores(team)">
                     <div class="row">
                         <div class="col text-center">
-                            <img src="../../assets/img/teams/img_team_knicks.png" class="w-20" />
+                            <img [src]="team.logo" style="height: 60px;" />
                         </div>
                     </div>
                     <div class="pt-1 text-center">
-                        <small class="text-dark-mid-gray" style="font-size: 0.8em;">New York Knocks</small>
+                        <small class="text-dark-mid-gray" style="font-size: 0.8em;">{{team.name}}</small>
                     </div>
                     <table class="score-stat-table table table-borderless table-sm m-1">
                         <tbody>
-                            <tr>
-                                <th scope="col">Team name</th>
-                                <td>Team 1</td>
-                            </tr>
                             <tr>
                                 <th scope="col">Average score</th>
                                 <td>70%</td>
@@ -43,23 +39,23 @@
 
 
         <!-- teams matches -->
-        <div class="col-4 p-1 custom-scrollbar mvh-80">
+        <div class="col-lg-4 col-md-12 p-1 custom-scrollbar mvh-80">
             <h5 class="text-dark-gray mb-3">Game stats</h5>
 
             <div class="list-group mt-3 mb-3">
 
                 <!-- team score item -->
-                <div class="custom-list-item list-group-item align-items-start p-2 m-0">
+                <div class="custom-list-item list-group-item align-items-start p-2 m-0" *ngFor="let item of gameDetails">
 
-                    <table class="score-stat-table table table-borderless table-sm m-1">
+                    <table class="score-stat-table table table-borderless table-sm m-1" *ngIf="item.scores && item.scores.length == 2">
                         <tbody>
                             <tr>
-                                <th scope="col">Team A</th>
-                                <td>80</td>
+                                <th scope="col">{{item.scores[0].team_details.name}}</th>
+                                <td>{{(item.scores[0].q1 + item.scores[0].q2 + item.scores[0].q3 + item.scores[0].q4)}}</td>
                             </tr>
                             <tr>
-                                <th scope="col">Team B</th>
-                                <td>82</td>
+                                <th scope="col">{{item.scores[1].team_details.name}}</th>
+                                <td>{{(item.scores[1].q1 + item.scores[1].q2 + item.scores[1].q3 + item.scores[1].q4)}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -73,57 +69,57 @@
 
 
         <!-- score stats -->
-        <div class="col-4 p-1 custom-scrollbar mvh-80">
+        <div class="col-lg-4 col-md-12 p-1 custom-scrollbar mvh-80">
             <h5 class="text-dark-gray mb-3">Score Stats</h5>
 
             <div class="list-group mt-3 mb-3">
 
                 <!-- team score stat item -->
-                <div class="custom-list-item list-group-item align-items-start p-2 m-0">
+                <div class="custom-list-item list-group-item align-items-start p-2 m-0" *ngFor="let item of teamScoreDetails">
 
-                    <div class="row mr-2">
-                        <div class="col">
-                            <table class="score-stat-table table table-borderless table-sm m-1">
+                    <div class="row mr-2 ">
+                        <div class="col ">
+                            <table class="score-stat-table table table-borderless table-sm m-1 ">
                                 <tbody>
                                     <tr>
-                                        <th scope="col">Field goals(%)</th>
-                                        <td class="pr-1">12</td>
+                                        <th scope="col ">Field goals(%)</th>
+                                        <td class="pr-1 ">{{(item.success_field_goals/item.total_field_goals)*100}}%</td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">3 points(%)</th>
-                                        <td class="pr-1">12</td>
+                                        <th scope="col ">3 points(%)</th>
+                                        <td class="pr-1 ">12</td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Free throws(%)</th>
-                                        <td class="pr-1">12</td>
+                                        <th scope="col ">Free throws(%)</th>
+                                        <td class="pr-1 ">{{(item.success_free_throws/item.total_free_throws)*100}}%</td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Rebounds</th>
-                                        <td class="pr-1">12</td>
+                                        <th scope="col ">Rebounds</th>
+                                        <td class="pr-1 ">{{item.rebounds}}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Offensive</th>
-                                        <td class="pr-1">12</td>
+                                        <th scope="col ">Offensive</th>
+                                        <td class="pr-1 ">{{item.offensive}}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Assists</th>
-                                        <td class="pr-1">12</td>
+                                        <th scope="col ">Assists</th>
+                                        <td class="pr-1 ">{{item.assists}}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Blocks</th>
-                                        <td class="pr-1">12</td>
+                                        <th scope="col ">Blocks</th>
+                                        <td class="pr-1 ">{{item.blocks}}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Steals</th>
-                                        <td class="pr-1">12</td>
+                                        <th scope="col ">Steals</th>
+                                        <td class="pr-1 ">{{item.steals}}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Points in the paint</th>
-                                        <td class="pr-1">12</td>
+                                        <th scope="col ">Points in the paint</th>
+                                        <td class="pr-1 ">{{item.points_in_the_paint}}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">Fouls - personal</th>
-                                        <td class="pr-1">12</td>
+                                        <th scope="col ">Fouls - personal</th>
+                                        <td class="pr-1 ">{{item.fouls_personal}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -140,4 +136,12 @@
 
     </div>
 
+</div>
+
+
+<div *ngIf="showError " class="alert alert-danger alert-dismissible fade show " role="alert " style="position: absolute; bottom: 2%; left: 2%; ">
+    <strong>Error</strong> Error occurred while loading data from the server. Please retry.
+    <button type="button " class="close " data-dismiss="alert " aria-label="Close " (click)="showError=false;">
+          <span aria-hidden="true ">&times;</span>
+        </button>
 </div>

@@ -12,6 +12,7 @@
 $COLOR-DARK-GRAY:#414141;
 $COLOR-DARK-MID-GRAY:#757474;
 $COLOR-LIGHT-GRAY:#a8a8a8;
+$COLOR-LIGHT-1-GRAY:#cfcdcd;
 $COLOR-LIGHTEST-GRAY:#e7e7e7;
 .text-dark-gray {
     color: $COLOR-DARK-GRAY;
@@ -89,11 +90,17 @@ $COLOR-LIGHTEST-GRAY:#e7e7e7;
 }
 
 //home buttons
-.home-btn {
+.home-btn,
+.summery-item {
     cursor: pointer;
 }
 
-.home-btn:hover {
+.home-btn {
+    background-color: $COLOR-LIGHT-1-GRAY;
+}
+
+.home-btn:hover,
+.summery-item:hover {
     background-color: $COLOR-LIGHTEST-GRAY;
 }
 
